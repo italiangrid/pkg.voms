@@ -133,6 +133,12 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/grid-security/%{name}
 mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/log/%{name}
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 
+%if 0%{?rhel} == 7
+  mkdir -p $RPM_BUILD_ROOT%{_exec_prefix}/lib/systemd/system
+  cp systemd/%{name}.service $RPM_BUILD_ROOT%{_exec_prefix}/lib/systemd/system/%{name}.service
+  rm -rf $RPM_BUILD_ROOT%{_initrddir}/%{name}
+%endif
+
 mkdir -p $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
 install -m 644 -p LICENSE AUTHORS $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
 
@@ -178,7 +184,14 @@ getent passwd %{name} >/dev/null || useradd -r -g %{name} \
 exit 0
 
 %post server
-/sbin/chkconfig --add %{name}
+if [ "$1" = "1" ] ; then
+  # add the service to chkconfig
+  %if 0%{?rhel} == 7
+    systemctl enable %{name}.service
+  %else
+    /sbin/chkconfig --add %{name}
+  %endif
+fi;
 
 if [ $1 -eq 2 ]; then
     chown -R %{name} /var/log/voms
@@ -186,14 +199,31 @@ if [ $1 -eq 2 ]; then
 fi
 
 %preun server
-if [ $1 = 0 ]; then
-    /sbin/service %{name} stop >/dev/null 2>&1 || :
-    /sbin/chkconfig --del %{name}
+if [ "$1" = "0" ]; then
+    # disable service
+    %if 0%{?rhel} == 7
+      systemctl disable %{name}.service
+    %else
+      /sbin/service %{name} stop >/dev/null 2>&1 || :
+      /sbin/chkconfig --del %{name}
+    %endif
 fi
 
 %postun server
 if [ $1 -ge 1 ]; then
+  %if 0%{?rhel} == 7
+    systemctl restart %{name}.service
+  %else
     /sbin/service %{name} condrestart >/dev/null 2>&1 || :
+  %endif
+fi
+
+if [ "$1" = "0" ] ; then
+  %if 0%{?rhel} == 7
+    rm -f %{_exec_prefix}/lib/systemd/system/%{name}.service
+  %else
+    rm -f %{_initrddir}/%{name}
+  %endif
 fi
 
 %pre clients
@@ -275,7 +305,13 @@ fi
 %files server
 %defattr(-,root,root,-)
 %{_sbindir}/%{name}
-%{_initrddir}/%{name}
+
+%if 0%{?rhel} == 7
+  %{_exec_prefix}/lib/systemd/system/%{name}.service
+%else
+  %{_initrddir}/%{name}
+%endif
+
 %config(noreplace) %{_sysconfdir}/sysconfig/%{name}
 %dir %{_sysconfdir}/%{name}
 %dir %{_sysconfdir}/grid-security/%{name}
@@ -290,6 +326,8 @@ fi
 %{_mandir}/man8/voms.8*
 
 %changelog
+* Mon May 18 2020 Nome Cognome <nome.cognome at cnaf.infn.it> - x.x.x-x
+
 * Tue Aug 23 2016 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 2.1.0-0
 - Packaging for 2.1.0
 
