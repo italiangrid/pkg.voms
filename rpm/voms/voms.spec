@@ -64,27 +64,6 @@ Requires:	%{name} = %{version}-%{release}
 %description doc
 Documentation for the Virtual Organization Membership Service.
 
-%package clients
-Summary:	Virtual Organization Membership Service Clients
-Group:		Applications/Internet
-
-Requires:	%{name}%{?_isa} = %{version}-%{release}
-Conflicts: voms-clients3 <= 3.0.4
-
-Requires(post):         %{_sbindir}/update-alternatives
-Requires(postun):       %{_sbindir}/update-alternatives
-
-%description clients
-The Virtual Organization Membership Service (VOMS) is an attribute authority
-which serves as central repository for VO user authorization information,
-providing support for sorting users into group hierarchies, keeping track of
-their roles and other attributes in order to issue trusted attribute
-certificates and SAML assertions used in the Grid environment for
-authorization purposes.
-
-This package provides command line applications to access the VOMS
-services.
-
 %package server
 Summary:	Virtual Organization Membership Service Server
 Group:		Applications/Internet
@@ -94,8 +73,11 @@ Requires:	gsoap
 Requires(pre):		shadow-utils
 Requires(post):		chkconfig
 Requires(preun):	chkconfig
+
+%if 0%{?rhel} < 7
 Requires(preun):	initscripts
 Requires(postun):	initscripts
+%endif
 
 %description server
 The Virtual Organization Membership Service (VOMS) is an attribute authority
@@ -133,9 +115,9 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/grid-security/%{name}
 mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/log/%{name}
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 
-%if 0%{?rhel} == 7
+%if 0%{?rhel} >= 7
   mkdir -p $RPM_BUILD_ROOT%{_exec_prefix}/lib/systemd/system
-  cp systemd/%{name}.service $RPM_BUILD_ROOT%{_exec_prefix}/lib/systemd/system/%{name}.service
+  cp systemd/%{name}.service $RPM_BUILD_ROOT%{_exec_prefix}/lib/systemd/system/%{name}@.service
   rm -rf $RPM_BUILD_ROOT%{_initrddir}/%{name}
 %endif
 
@@ -186,9 +168,7 @@ exit 0
 %post server
 if [ "$1" = "1" ] ; then
   # add the service to chkconfig
-  %if 0%{?rhel} == 7
-    systemctl enable %{name}.service
-  %else
+  %if 0%{?rhel} < 7
     /sbin/chkconfig --add %{name}
   %endif
 fi;
@@ -201,9 +181,7 @@ fi
 %preun server
 if [ "$1" = "0" ]; then
     # disable service
-    %if 0%{?rhel} == 7
-      systemctl disable %{name}.service
-    %else
+    %if 0%{?rhel} < 7
       /sbin/service %{name} stop >/dev/null 2>&1 || :
       /sbin/chkconfig --del %{name}
     %endif
@@ -211,51 +189,17 @@ fi
 
 %postun server
 if [ $1 -ge 1 ]; then
-  %if 0%{?rhel} == 7
-    systemctl restart %{name}.service
-  %else
+  %if 0%{?rhel} < 7
     /sbin/service %{name} condrestart >/dev/null 2>&1 || :
   %endif
 fi
 
 if [ "$1" = "0" ] ; then
-  %if 0%{?rhel} == 7
-    rm -f %{_exec_prefix}/lib/systemd/system/%{name}.service
+  %if 0%{?rhel} >= 7
+    rm -f %{_exec_prefix}/lib/systemd/system/%{name}@.service
   %else
     rm -f %{_initrddir}/%{name}
   %endif
-fi
-
-%pre clients
-
-if [ $1 -eq 2 ]; then 
-  for c in voms-proxy-init voms-proxy-info voms-proxy-destroy; do
-    if [[ -x %{_bindir}/$c && ! -L %{_bindir}/$c ]]; then
-      rm -f %{_bindir}/$c
-    fi
-  done
-fi
-
-%post clients
-
-%{_sbindir}/update-alternatives --install %{_bindir}/voms-proxy-init \
-    voms-proxy-init %{_bindir}/voms-proxy-init2 50 \
-    --slave %{_mandir}/man1/voms-proxy-init.1.gz voms-proxy-init-man %{_mandir}/man1/voms-proxy-init2.1.gz 
-
-%{_sbindir}/update-alternatives --install %{_bindir}/voms-proxy-info \
-    voms-proxy-info %{_bindir}/voms-proxy-info2 50 \
-    --slave %{_mandir}/man1/voms-proxy-info.1.gz voms-proxy-info-man %{_mandir}/man1/voms-proxy-info2.1.gz
-
-%{_sbindir}/update-alternatives --install %{_bindir}/voms-proxy-destroy \
-    voms-proxy-destroy %{_bindir}/voms-proxy-destroy2 50 \
-    --slave %{_mandir}/man1/voms-proxy-destroy.1.gz voms-proxy-destroy-man %{_mandir}/man1/voms-proxy-destroy2.1.gz
-
-%postun clients
-
-if [ $1 -eq 0 ] ; then
-  %{_sbindir}/update-alternatives  --remove voms-proxy-init %{_bindir}/voms-proxy-init2
-  %{_sbindir}/update-alternatives  --remove voms-proxy-info %{_bindir}/voms-proxy-info2
-  %{_sbindir}/update-alternatives  --remove voms-proxy-destroy %{_bindir}/voms-proxy-destroy2
 fi
 
 %files
@@ -282,31 +226,11 @@ fi
 %doc %{_docdir}/%{name}-%{version}/VOMS_C_API
 %doc %{_docdir}/%{name}-%{version}/VOMS_CC_API
 
-%files clients
-%defattr(-,root,root,-)
-
-%ghost %{_bindir}/voms-proxy-destroy
-%ghost %{_bindir}/voms-proxy-info
-%ghost %{_bindir}/voms-proxy-init
-
-%{_bindir}/voms-proxy-destroy2
-%{_bindir}/voms-proxy-info2
-%{_bindir}/voms-proxy-init2
-%{_bindir}/voms-proxy-fake
-%{_bindir}/voms-proxy-list
-%{_bindir}/voms-verify
-
-%{_mandir}/man1/voms-proxy-destroy2.1.gz
-%{_mandir}/man1/voms-proxy-info2.1.gz
-%{_mandir}/man1/voms-proxy-init2.1.gz
-%{_mandir}/man1/voms-proxy-fake.1.gz
-%{_mandir}/man1/voms-proxy-list.1.gz
-
 %files server
 %defattr(-,root,root,-)
 %{_sbindir}/%{name}
 
-%if 0%{?rhel} == 7
+%if 0%{?rhel} >= 7
   %{_exec_prefix}/lib/systemd/system/%{name}.service
 %else
   %{_initrddir}/%{name}
@@ -326,9 +250,7 @@ fi
 %{_mandir}/man8/voms.8*
 
 %changelog
-* Mon May 18 2020 Nome Cognome <nome.cognome at cnaf.infn.it> - x.x.x-x
-
-* Tue Aug 23 2016 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 2.1.0-0
+* Mon May 18 2020 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 2.1.0-0
 - Packaging for 2.1.0
 
 * Tue Aug 23 2016 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 2.0.14-0
