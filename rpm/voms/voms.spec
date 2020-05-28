@@ -135,17 +135,6 @@ cp -pr  doc/apidoc/api/VOMS_CC_API/html \
 	$RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/VOMS_CC_API
 rm -f $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/VOMS_CC_API/html/installdox
 
-for b in voms-proxy-init voms-proxy-info voms-proxy-destroy; do
-  ## Rename client binaries 
-  mv $RPM_BUILD_ROOT%{_bindir}/${b} $RPM_BUILD_ROOT%{_bindir}/${b}2
-
-  ## and man pages
-  mv $RPM_BUILD_ROOT%{_mandir}/man1/${b}.1 $RPM_BUILD_ROOT%{_mandir}/man1/${b}2.1
-
-  # Needed by alternatives. See http://fedoraproject.org/wiki/Packaging:Alternatives
-  touch $RPM_BUILD_ROOT/%{_bindir}/${b}
-done
-
 %clean
 
 rm -rf $RPM_BUILD_ROOT
