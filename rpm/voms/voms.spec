@@ -117,7 +117,7 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 
 %if 0%{?rhel} >= 7
   mkdir -p $RPM_BUILD_ROOT%{_exec_prefix}/lib/systemd/system
-  cp systemd/%{name}.service $RPM_BUILD_ROOT%{_exec_prefix}/lib/systemd/system/%{name}@.service
+  cp systemd/%{name}@.service $RPM_BUILD_ROOT%{_exec_prefix}/lib/systemd/system/%{name}@.service
   rm -rf $RPM_BUILD_ROOT%{_initrddir}/%{name}
 %endif
 
@@ -134,6 +134,10 @@ mkdir -p $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/VOMS_CC_API
 cp -pr  doc/apidoc/api/VOMS_CC_API/html \
 	$RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/VOMS_CC_API
 rm -f $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/VOMS_CC_API/html/installdox
+
+rm -f $RPM_BUILD_ROOT/usr/bin/voms-proxy-* 
+rm -f $RPM_BUILD_ROOT/usr/bin/voms-verify 
+rm -r $RPM_BUILD_ROOT/usr/share/man/man1/voms-proxy-* 
 
 %clean
 
@@ -220,7 +224,7 @@ fi
 %{_sbindir}/%{name}
 
 %if 0%{?rhel} >= 7
-  %{_exec_prefix}/lib/systemd/system/%{name}.service
+  %{_exec_prefix}/lib/systemd/system/%{name}@.service
 %else
   %{_initrddir}/%{name}
 %endif
