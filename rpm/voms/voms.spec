@@ -159,12 +159,11 @@ getent passwd %{name} >/dev/null || useradd -r -g %{name} \
 exit 0
 
 %post server
+%if 0%{?rhel} < 7
 if [ "$1" = "1" ] ; then
-  # add the service to chkconfig
-  %if 0%{?rhel} < 7
-    /sbin/chkconfig --add %{name}
-  %endif
-fi;
+  /sbin/chkconfig --add %{name}
+fi
+%endif
 
 if [ $1 -eq 2 ]; then
     chown -R %{name} /var/log/voms
@@ -172,20 +171,22 @@ if [ $1 -eq 2 ]; then
 fi
 
 %preun server
+
+%if 0%{?rhel} < 7
 if [ "$1" = "0" ]; then
     # disable service
-    %if 0%{?rhel} < 7
-      /sbin/service %{name} stop >/dev/null 2>&1 || :
-      /sbin/chkconfig --del %{name}
-    %endif
+    /sbin/service %{name} stop >/dev/null 2>&1 || :
+    /sbin/chkconfig --del %{name}
 fi
+%endif
 
 %postun server
+
+%if 0%{?rhel} < 7
 if [ $1 -ge 1 ]; then
-  %if 0%{?rhel} < 7
     /sbin/service %{name} condrestart >/dev/null 2>&1 || :
-  %endif
 fi
+%endif
 
 if [ "$1" = "0" ] ; then
   %if 0%{?rhel} >= 7
