@@ -1,4 +1,4 @@
-COMPONENTS="voms voms-admin-server voms-admin-client"
+COMPONENTS="voms voms-admin-server voms-admin-client voms-mysql-plugin"
 PKG_TAG=v0120.01
 PKG_STAGE_RPMS=1
 INCLUDE_BUILD_NUMBER=1

@@ -1,6 +1,6 @@
 Name:		voms-mysql-plugin
 Version:	3.1.7
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	VOMS server plugin for MySQL
 
 Group:		System Environment/Libraries
@@ -41,6 +41,10 @@ make install DESTDIR=$RPM_BUILD_ROOT
 rm $RPM_BUILD_ROOT%{_libdir}/libvomsmysql.a
 rm $RPM_BUILD_ROOT%{_libdir}/libvomsmysql.la
 
+mkdir $RPM_BUILD_ROOT%{_libdir}/voms
+mv $RPM_BUILD_ROOT%{_libdir}/libvomsmysql.so $RPM_BUILD_ROOT%{_libdir}/voms
+ln -s $RPM_BUILD_ROOT%{_libdir}/voms/libvomsmysql.so $RPM_BUILD_ROOT%{_libdir}/libvomsmysql.so
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -48,10 +52,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_datadir}/voms/voms-mysql.data
 %{_datadir}/voms/voms-mysql-compat.data
+%{_libdir}/voms/libvomsmysql.so
 %{_libdir}/libvomsmysql.so
 
 %changelog
-* Fri Aug 26 2016 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 3.1.7-0
+* Fri Aug 31 2020 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 3.1.7-2
+- Changed location of mysql plugin library to be aligned with EPEL (but also be backward-compatible) 
+
+* Fri Aug 26 2016 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 3.1.7-1
 - Update to version 3.1.7
 
 * Tue May 31 2011 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 3.1.6-1
