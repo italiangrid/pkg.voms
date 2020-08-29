@@ -43,7 +43,7 @@ rm $RPM_BUILD_ROOT%{_libdir}/libvomsmysql.la
 
 mkdir $RPM_BUILD_ROOT%{_libdir}/voms
 mv $RPM_BUILD_ROOT%{_libdir}/libvomsmysql.so $RPM_BUILD_ROOT%{_libdir}/voms
-ln -s $RPM_BUILD_ROOT%{_libdir}/voms/libvomsmysql.so $RPM_BUILD_ROOT%{_libdir}/libvomsmysql.so
+ln -s %{_libdir}/voms/libvomsmysql.so $RPM_BUILD_ROOT%{_libdir}/libvomsmysql.so
 
 %clean
 rm -rf $RPM_BUILD_ROOT
