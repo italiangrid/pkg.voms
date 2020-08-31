@@ -22,13 +22,13 @@
 %define release_version %{base_release}
 %endif
 
-%global jar_names  voms-clients bcprov-1.61 bcmail-1.61 canl voms-api-java3 commons-io
+%global jar_names  voms-clients bouncycastle bouncycastle-pkix bouncycastle-mail canl voms-api-java commons-io
 
 %global orig_name voms-clients
 %global _varlib /var/lib
 
-Name: voms-clients3
-Version: 3.3.1
+Name: voms-clients-java
+Version: 3.3.2
 Release: %{release_version}%{?dist}
 Summary: The Virtual Organisation Membership Service command line clients
 
@@ -52,6 +52,7 @@ Requires(post):         %{_sbindir}/update-alternatives
 Requires(postun):       %{_sbindir}/update-alternatives
 
 Provides:       voms-clients = %{version}
+Provides:       voms-clients3 = %{version}
 Conflicts:      voms-clients <= 2.0.11-1
 
 

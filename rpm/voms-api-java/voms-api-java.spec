@@ -18,7 +18,7 @@
 
 %global orig_name voms-api-java
 
-Name: voms-api-java3
+Name: voms-api-java
 Version: %{base_version}
 Release: %{release_version}%{?dist}
 Summary: The Virtual Organisation Membership Service Java APIs
@@ -35,8 +35,9 @@ BuildRequires:  %{maven}
 BuildRequires:  jpackage-utils
 BuildRequires:  java-%{jdk_version}-openjdk-devel
 
+Provides:       voms-api-java3
 Requires:       jpackage-utils
-Requires:       canl-java >= 2.5
+Requires:       canl-java >= 2.6
 Requires:       java-%{jdk_version}-openjdk
 
 %description
