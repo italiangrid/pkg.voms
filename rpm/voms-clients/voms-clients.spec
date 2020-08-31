@@ -1,4 +1,4 @@
-%global pom_version 3.3.1-SNAPSHOT
+%global pom_version 3.3.2
 %global base_release 0
 
 %if 0%{?rhel} == 5
@@ -22,7 +22,7 @@
 %define release_version %{base_release}
 %endif
 
-%global jar_names  voms-clients bcprov-1.46 bcmail-1.46 canl voms-api-java3 commons-io
+%global jar_names  voms-clients bcprov-1.61 bcmail-1.61 canl voms-api-java3 commons-io
 
 %global orig_name voms-clients
 %global _varlib /var/lib
@@ -179,8 +179,8 @@ if [ $1 -eq 0 ] ; then
 fi
 
 %changelog
-* Fri Mar 9 2018 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 3.3.1-0
-- Packaging 3.3.1 version
+* Fri Mar 9 2018 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 3.3.2-0
+- Packaging 3.3.2 version
 
 * Mon Dec 4 2017 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 3.3.0-0
 - Packaging 3.3.0 version
