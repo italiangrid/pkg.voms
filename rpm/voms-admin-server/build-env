@@ -1,6 +1,6 @@
 BUILD_NAME=voms-admin-server
 BUILD_REPO=git://github.com/italiangrid/voms-admin-server
-BUILD_TAG=v3.8.0
+BUILD_TAG=update-struts-2-5-22
 PKG_REPO=git://github.com/italiangrid/pkg.voms.git
 PKG_TAG=${PKG_TAG}
 PKG_SPEC_FILE=voms-admin-server/rpm/voms-admin-server/voms-admin-server.spec
