@@ -1,4 +1,4 @@
-%global pom_version 3.3.2-SNAPSHOT
+%global pom_version 3.3.2
 %global base_version 3.3.2
 %global base_release 0
 
