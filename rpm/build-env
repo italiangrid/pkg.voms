@@ -1,11 +1,11 @@
 COMPONENTS="voms voms-admin-server voms-admin-client voms-mysql-plugin voms-api-java voms-clients"
-PKG_TAG=v0120.01
+PKG_TAG=v0920.01
 PKG_STAGE_RPMS=1
 INCLUDE_BUILD_NUMBER=1
-PKG_REPO=git://github.com/italiangrid/pkg.voms.git
+#PKG_REPO=git://github.com/italiangrid/pkg.voms.git
 #PKG_UPLOAD_RPMS=1
 #PKG_NEXUS_HOST=https://repo.cloud.cnaf.infn.it
-#PKG_REPO=/code/pkg.voms
+PKG_REPO=/code/pkg.voms
 #BUILD_REPO_VOMS_ADMIN_SERVER=/code/voms-admin-server
 #BUILD_REPO_VOMS_CLIENTS=/code/voms-clients
 #MVN_REPO_CONTAINER_NAME=mvn-build-repo
