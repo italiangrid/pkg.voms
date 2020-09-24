@@ -64,6 +64,27 @@ Requires:	%{name} = %{version}-%{release}
 %description doc
 Documentation for the Virtual Organization Membership Service.
 
+%package clients
+Summary:	Virtual Organization Membership Service Clients
+Group:		Applications/Internet
+
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+Conflicts: voms-clients3 <= 3.0.4
+
+Requires(post):         %{_sbindir}/update-alternatives
+Requires(postun):       %{_sbindir}/update-alternatives
+
+%description clients
+The Virtual Organization Membership Service (VOMS) is an attribute authority
+which serves as central repository for VO user authorization information,
+providing support for sorting users into group hierarchies, keeping track of
+their roles and other attributes in order to issue trusted attribute
+certificates and SAML assertions used in the Grid environment for
+authorization purposes.
+
+This package provides command line applications to access the VOMS
+services.
+
 %package server
 Summary:	Virtual Organization Membership Service Server
 Group:		Applications/Internet
@@ -196,6 +217,39 @@ if [ "$1" = "0" ] ; then
   %endif
 fi
 
+%pre clients
+
+if [ $1 -eq 2 ]; then 
+  for c in voms-proxy-init voms-proxy-info voms-proxy-destroy; do
+    if [[ -x %{_bindir}/$c && ! -L %{_bindir}/$c ]]; then
+      rm -f %{_bindir}/$c
+    fi
+  done
+fi
+
+%post clients
+
+%{_sbindir}/update-alternatives --install %{_bindir}/voms-proxy-init \
+    voms-proxy-init %{_bindir}/voms-proxy-init2 50 \
+    --slave %{_mandir}/man1/voms-proxy-init.1.gz voms-proxy-init-man %{_mandir}/man1/voms-proxy-init2.1.gz 
+
+%{_sbindir}/update-alternatives --install %{_bindir}/voms-proxy-info \
+    voms-proxy-info %{_bindir}/voms-proxy-info2 50 \
+    --slave %{_mandir}/man1/voms-proxy-info.1.gz voms-proxy-info-man %{_mandir}/man1/voms-proxy-info2.1.gz
+
+%{_sbindir}/update-alternatives --install %{_bindir}/voms-proxy-destroy \
+    voms-proxy-destroy %{_bindir}/voms-proxy-destroy2 50 \
+    --slave %{_mandir}/man1/voms-proxy-destroy.1.gz voms-proxy-destroy-man %{_mandir}/man1/voms-proxy-destroy2.1.gz
+
+%postun clients
+
+if [ $1 -eq 0 ] ; then
+  %{_sbindir}/update-alternatives  --remove voms-proxy-init %{_bindir}/voms-proxy-init2
+  %{_sbindir}/update-alternatives  --remove voms-proxy-info %{_bindir}/voms-proxy-info2
+  %{_sbindir}/update-alternatives  --remove voms-proxy-destroy %{_bindir}/voms-proxy-destroy2
+fi
+
+
 %files
 %defattr(-,root,root,-)
 %{_libdir}/libvomsapi.so.1*
@@ -219,6 +273,26 @@ fi
 %defattr(-,root,root,-)
 %doc %{_docdir}/%{name}-%{version}/VOMS_C_API
 %doc %{_docdir}/%{name}-%{version}/VOMS_CC_API
+
+%files clients
+%defattr(-,root,root,-)
+
+%ghost %{_bindir}/voms-proxy-destroy
+%ghost %{_bindir}/voms-proxy-info
+%ghost %{_bindir}/voms-proxy-init
+
+%{_bindir}/voms-proxy-destroy2
+%{_bindir}/voms-proxy-info2
+%{_bindir}/voms-proxy-init2
+%{_bindir}/voms-proxy-fake
+%{_bindir}/voms-proxy-list
+%{_bindir}/voms-verify
+
+%{_mandir}/man1/voms-proxy-destroy2.1.gz
+%{_mandir}/man1/voms-proxy-info2.1.gz
+%{_mandir}/man1/voms-proxy-init2.1.gz
+%{_mandir}/man1/voms-proxy-fake.1.gz
+%{_mandir}/man1/voms-proxy-list.1.gz
 
 %files server
 %defattr(-,root,root,-)
