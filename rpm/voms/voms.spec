@@ -156,9 +156,16 @@ cp -pr  doc/apidoc/api/VOMS_CC_API/html \
 	$RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/VOMS_CC_API
 rm -f $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/VOMS_CC_API/html/installdox
 
-rm -f $RPM_BUILD_ROOT/usr/bin/voms-proxy-* 
-rm -f $RPM_BUILD_ROOT/usr/bin/voms-verify 
-rm -r $RPM_BUILD_ROOT/usr/share/man/man1/voms-proxy-* 
+for b in voms-proxy-init voms-proxy-info voms-proxy-destroy; do
+  ## Rename client binaries 
+  mv $RPM_BUILD_ROOT%{_bindir}/${b} $RPM_BUILD_ROOT%{_bindir}/${b}2
+
+  ## and man pages
+  mv $RPM_BUILD_ROOT%{_mandir}/man1/${b}.1 $RPM_BUILD_ROOT%{_mandir}/man1/${b}2.1
+
+  # Needed by alternatives. See http://fedoraproject.org/wiki/Packaging:Alternatives
+  touch $RPM_BUILD_ROOT/%{_bindir}/${b}
+done
 
 %clean
 
@@ -248,7 +255,6 @@ if [ $1 -eq 0 ] ; then
   %{_sbindir}/update-alternatives  --remove voms-proxy-info %{_bindir}/voms-proxy-info2
   %{_sbindir}/update-alternatives  --remove voms-proxy-destroy %{_bindir}/voms-proxy-destroy2
 fi
-
 
 %files
 %defattr(-,root,root,-)
