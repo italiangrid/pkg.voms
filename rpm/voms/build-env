@@ -1,6 +1,6 @@
 BUILD_NAME=voms
 BUILD_REPO=git://github.com/italiangrid/voms
-BUILD_TAG=develop
+BUILD_TAG=v2.0.15
 PKG_REPO=git://github.com/italiangrid/pkg.voms.git
 PKG_TAG=master
 PKG_SPEC_FILE=voms/rpm/voms/voms.spec
