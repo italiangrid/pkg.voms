@@ -1,6 +1,6 @@
 BUILD_NAME=voms-api-java
 BUILD_REPO=git://github.com/italiangrid/voms-api-java
-BUILD_TAG=develop-3.3
+BUILD_TAG=v3.3.2
 PKG_REPO=git://github.com/italiangrid/pkg.voms.git
 PKG_TAG=master
 PKG_SPEC_FILE=voms-api-java/rpm/voms-api-java/voms-api-java.spec

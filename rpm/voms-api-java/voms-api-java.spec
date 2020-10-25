@@ -1,6 +1,6 @@
 %global pom_version 3.3.2
 %global base_version 3.3.2
-%global base_release 0
+%global base_release 1
 
 %define jdk_version 1.8.0
 

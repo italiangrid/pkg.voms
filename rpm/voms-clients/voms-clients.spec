@@ -1,5 +1,5 @@
 %global pom_version 3.3.2
-%global base_release 0
+%global base_release 1
 
 %if 0%{?rhel} == 5
 %define jdk_version 1.7.0
