@@ -4,7 +4,7 @@
 %global random_num %(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 8)
 
 %global base_version 3.8.0
-%global base_release 0
+%global base_release 1
 
 %if 0%{?rhel} == 5
 %define jdk_version 1.7.0
