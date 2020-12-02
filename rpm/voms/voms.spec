@@ -1,6 +1,15 @@
+%if %{?build_number:1}%{!?build_number:0}
+%define release_version 0.build.%{build_number}
+%else
+%define release_version %{base_release}
+%endif
+
+%global base_version 2.0.16
+%global base_release 0
+
 Name: voms
-Version: 2.0.15
-Release: 1%{?dist}
+Version: %{base_version}
+Release: %{release_version}%{?dist}
 Summary: The Virtual Organisation Membership Service C++ APIs
 
 Group:          System Environment/Libraries
@@ -324,5 +333,7 @@ fi
 %{_mandir}/man8/voms.8*
 
 %changelog
-* Thu Sep 24 2020 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 2.0.15-0
+* Wed Dec 2 2020 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 2.0.16-0
+- Packaging for 2.0.16
+* Thu Sep 24 2020 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 2.0.15-1
 - Packaging for 2.0.15
