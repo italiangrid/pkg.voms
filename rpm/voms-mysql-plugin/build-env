@@ -1,9 +1,9 @@
 BUILD_NAME=voms-mysql-plugin
 BUILD_REPO=git://github.com/italiangrid/voms-mysql-plugin
-BUILD_TAG=v3.1.7
+BUILD_TAG=VOMS-885
 PKG_REPO=git://github.com/italiangrid/pkg.voms.git
 PKG_TAG=master
 PKG_SPEC_FILE=voms-mysql-plugin/rpm/voms-mysql-plugin/voms-mysql-plugin.spec
 PKG_PREBUILD_SCRIPT=voms-mysql-plugin/rpm/voms-mysql-plugin/pre-build.sh
 PKG_STAGE_RPMS=1
-TARBALL_VERSION=3.1.7
+TARBALL_VERSION=3.1.8

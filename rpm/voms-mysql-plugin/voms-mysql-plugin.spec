@@ -1,5 +1,5 @@
 Name:		voms-mysql-plugin
-Version:	3.1.7
+Version:	3.1.8
 Release:	2%{?dist}
 Summary:	VOMS server plugin for MySQL
 
@@ -54,8 +54,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/voms/voms-mysql-compat.data
 %{_libdir}/voms/libvomsmysql.so
 %{_libdir}/libvomsmysql.so
+%{_unitdir}/voms@.service.d/after-mariadb.conf
 
 %changelog
+* Fri Nov 11 2020 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 3.1.8
+- Update to version 3.1.8
+
 * Fri Aug 31 2020 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 3.1.7-2
 - Changed location of mysql plugin library to be aligned with EPEL (but also be backward-compatible) 
 
