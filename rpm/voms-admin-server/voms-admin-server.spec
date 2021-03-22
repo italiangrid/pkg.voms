@@ -3,7 +3,7 @@
 
 %global random_num %(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 8)
 
-%global base_version 3.8.0
+%global base_version 3.8.1
 %global base_release 1
 
 %if 0%{?rhel} == 5
@@ -196,6 +196,8 @@ fi
 %attr(-,voms,voms) %dir %{_localstatedir}/log/voms-admin
 
 %changelog
+* Mon Mar 22 2021 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 3.8.1-0
+- Packaging for version 3.8.1
 
 * Tue Jan 7 2020 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 3.8.0-0
 - Packaging for version 3.8.0

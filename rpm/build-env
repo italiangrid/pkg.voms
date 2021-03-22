@@ -1,5 +1,5 @@
-COMPONENTS="voms voms-mysql-plugin"
-PKG_TAG=v1220.01
+COMPONENTS="voms-admin-server voms-admin-client voms voms-mysql-plugin"
+PKG_TAG=v0321.01
 PKG_STAGE_RPMS=1
 INCLUDE_BUILD_NUMBER=1
 #PKG_REPO=git://github.com/italiangrid/pkg.voms.git
