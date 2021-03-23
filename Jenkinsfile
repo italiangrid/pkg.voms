@@ -7,6 +7,7 @@ def pkg_build_number() {
 
 def platform2Dir = [
   "centos7" : 'rpm',
+  "centos7java11": 'rpm',
   "centos8" : 'rpm',
 ]
 
