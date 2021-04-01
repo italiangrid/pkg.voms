@@ -20,7 +20,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
 Packager: Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it>
-Source : voms-mp.tar.gz
+Source : voms-mysql-mp.tar.gz
 
 %description
 The Virtual Organization Membership Service (VOMS) is an attribute authority
