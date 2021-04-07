@@ -6,7 +6,7 @@
 %global pyver %(%{__python} -c "import sys; print sys.version[0]+sys.version[2]")
 %global pydotver %(%{__python} -c "import sys; print sys.version[:3]")
 
-%global base_version 2.0.20
+%global base_version 2.0.21
 %global base_release 1
 
 %if %{?build_number:1}%{!?build_number:0}
@@ -99,6 +99,9 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitelib}/voms_admin_client-%{version}-py%{pydotver}.egg-info
 
 %changelog
+* Wed Apr 7 2021 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 2.0.21-1
+- 2.0.21 packaging
+
 * Sat Apr 8 2017 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 2.0.20-0
 - 2.0.20 packaging
 
