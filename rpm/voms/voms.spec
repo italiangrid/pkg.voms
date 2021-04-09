@@ -1,5 +1,5 @@
 %global base_version 2.0.16
-%global base_release 0
+%global base_release 1
 
 %if %{?build_number:1}%{!?build_number:0}
 %define release_version 0.build.%{build_number}
