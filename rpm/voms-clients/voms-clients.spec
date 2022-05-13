@@ -1,5 +1,5 @@
-%global pom_version 3.3.2
-%global base_release 1
+%global pom_version 3.3.3
+%global base_release 0
 
 %if 0%{?rhel} == 5
 %define jdk_version 1.7.0
@@ -28,7 +28,7 @@
 %global _varlib /var/lib
 
 Name: voms-clients-java
-Version: 3.3.2
+Version: 3.3.3
 Release: %{release_version}%{?dist}
 Summary: The Virtual Organisation Membership Service command line clients
 
@@ -180,6 +180,9 @@ if [ $1 -eq 0 ] ; then
 fi
 
 %changelog
+* Fri May 13 2022 Enrico Vianello <enrivo.vianello at cnaf.infn.it> - 3.3.3-0
+- Packaging 3.3.3 version
+
 * Fri Mar 9 2018 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 3.3.2-0
 - Packaging 3.3.2 version
 
