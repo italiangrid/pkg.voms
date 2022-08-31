@@ -1,4 +1,4 @@
-COMPONENTS="voms voms-clients"
+COMPONENTS="voms voms-clients voms-admin-server"
 PKG_TAG=v0621.01
 PKG_STAGE_RPMS=1
 INCLUDE_BUILD_NUMBER=1
