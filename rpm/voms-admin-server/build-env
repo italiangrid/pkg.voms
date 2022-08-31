@@ -1,7 +1,7 @@
 BUILD_NAME=voms-admin-server
-BUILD_REPO=git://github.com/italiangrid/voms-admin-server
+BUILD_REPO=https://github.com/italiangrid/voms-admin-server.git
 BUILD_TAG=remove-permission-cache
-PKG_REPO=git://github.com/italiangrid/pkg.voms.git
+PKG_REPO=https://github.com/italiangrid/pkg.voms.git
 PKG_TAG=${PKG_TAG}
 PKG_SPEC_FILE=voms-admin-server/rpm/voms-admin-server/voms-admin-server.spec
 TARBALL_VERSION=3.9.0
