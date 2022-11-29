@@ -1,4 +1,4 @@
-COMPONENTS="voms"
+COMPONENTS="voms voms-mysql-plugin"
 PKG_TAG=centos9
 PKG_STAGE_RPMS=1
 INCLUDE_BUILD_NUMBER=1

@@ -12,9 +12,16 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Provides:	voms-mysql = %{version}-%{release}
 Obsoletes:	voms-mysql < %{version}-%{release}
 Requires:	voms-server%{?_isa}
+
+BuildRequires:	make
+BuildRequires:	gcc-c++
 BuildRequires:	libtool
-BuildRequires:	mysql-devel%{?_isa}
-BuildRequires:	openssl%{?_isa}
+%if %{?fedora}%{!?fedora:0} >= 28 || %{?rhel}%{!?rhel:0} >= 8
+BuildRequires:	mariadb-connector-c-devel
+%else
+BuildRequires:	mysql-devel
+%endif
+BuildRequires:	openssl-devel
 
 %description
 The Virtual Organization Membership Service (VOMS) is an attribute authority
