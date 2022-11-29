@@ -1,4 +1,4 @@
-COMPONENTS="voms voms-mysql-plugin"
+COMPONENTS="voms voms-admin-client voms-admin-server voms-api-java voms-clients voms-mysql-plugin"
 PKG_TAG=centos9
 PKG_STAGE_RPMS=1
 INCLUDE_BUILD_NUMBER=1
