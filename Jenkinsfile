@@ -8,7 +8,7 @@ def pkg_build_number() {
 def platform2Dir = [
   "centos7" : 'rpm',
   "centos7java11": 'rpm',
-  "centos8" : 'rpm',
+  "centos7java17": 'rpm',
   "centos9" : 'rpm',
 ]
 
@@ -41,7 +41,7 @@ pipeline {
   environment {
     PKG_TAG = "${env.BRANCH_NAME}"
     DOCKER_REGISTRY_HOST = "${env.DOCKER_REGISTRY_HOST}"
-    PLATFORMS = "centos9"
+    PLATFORMS = "centos7 centos9"
     PACKAGES_VOLUME = "pkg-vol-${env.BUILD_TAG}"
     STAGE_AREA_VOLUME = "sa-vol-${env.BUILD_TAG}"
     DOCKER_ARGS = "--rm -v /opt/cnafsd/helper-scripts/scripts/:/usr/local/bin "
