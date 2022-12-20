@@ -3,7 +3,7 @@
 
 packages=
 
-if [ "${ID}" = "centos" ] && [ "${VERSION_ID}" < "8" ]; then
+if [ "${ID}" = "centos" ] && [ "${VERSION_ID}" -lt 8 ]; then
   packages="${packages} mysql-devel"
 else
   packages="${packages} mariadb-connector-c-devel"
