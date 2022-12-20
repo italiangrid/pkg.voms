@@ -38,6 +38,10 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
 
+  triggers {
+    cron('@daily')
+  }
+
   environment {
     PKG_TAG = "${env.BRANCH_NAME}"
     DOCKER_REGISTRY_HOST = "${env.DOCKER_REGISTRY_HOST}"
