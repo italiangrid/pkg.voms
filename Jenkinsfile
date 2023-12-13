@@ -90,17 +90,4 @@ pipeline {
     }
   }
 
-  post {
-    failure {
-      slackSend channel: '#voms', color: 'danger', message: "${env.JOB_NAME} - #${env.BUILD_NUMBER} Failure (<${env.BUILD_URL}|Open>)"
-    }
-    
-    changed {
-      script{
-        if('SUCCESS'.equals(currentBuild.currentResult)) {
-          slackSend channel: '#voms', color: 'good', message: "${env.JOB_NAME} - #${env.BUILD_NUMBER} Back to normal (<${env.BUILD_URL}|Open>)"
-        }
-      }
-    }
-  }
 }
