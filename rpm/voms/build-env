@@ -1,6 +1,6 @@
 BUILD_NAME=voms
 BUILD_REPO=https://github.com/italiangrid/voms.git
-BUILD_TAG=develop
+BUILD_TAG=124-adapt-client-libraries-and-clients-to-voms-aa
 PKG_REPO=https://github.com/italiangrid/pkg.voms.git
 PKG_SPEC_FILE=voms/rpm/voms/voms.spec
 PKG_PREBUILD_SCRIPT=voms/rpm/voms/pre-build.sh

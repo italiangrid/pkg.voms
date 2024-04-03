@@ -2,7 +2,7 @@
 COMPONENTS="voms"
 #COMPONENTS_centos7="voms-admin-server voms-admin-client"
 #COMPONENTS_centos9="voms-admin-server"
-PKG_TAG=centos9
+PKG_TAG=voms-124
 PKG_STAGE_RPMS=1
 INCLUDE_BUILD_NUMBER=1
 #PKG_REPO=git://github.com/italiangrid/pkg.voms.git
