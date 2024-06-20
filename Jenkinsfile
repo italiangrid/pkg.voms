@@ -10,6 +10,8 @@ def platform2Dir = [
   "centos7java11": 'rpm',
   "centos7java17": 'rpm',
   "centos9" : 'rpm',
+  "almalinux9java11": 'rpm',
+  "almalinux9java17": 'rpm',
 ]
 
 def buildPackages(platform, platform2Dir) {
@@ -45,7 +47,7 @@ pipeline {
   environment {
     PKG_TAG = "${env.BRANCH_NAME}"
     DOCKER_REGISTRY_HOST = "${env.DOCKER_REGISTRY_HOST}"
-    PLATFORMS = "centos7 centos9"
+    PLATFORMS = "almalinux9java11"
     PACKAGES_VOLUME = "pkg-vol-${env.BUILD_TAG}"
     STAGE_AREA_VOLUME = "sa-vol-${env.BUILD_TAG}"
     DOCKER_ARGS = "--rm -v /opt/cnafsd/helper-scripts/scripts/:/usr/local/bin "
