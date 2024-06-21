@@ -3,7 +3,6 @@
 %{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
 %endif
 
-%global pyver %(%{__python} -c "import sys; print sys.version[0]+sys.version[2]")
 %global pydotver %(%{__python} -c "import sys; print sys.version[:3]")
 
 %global base_version 2.0.21
