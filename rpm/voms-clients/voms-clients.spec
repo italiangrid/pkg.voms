@@ -1,20 +1,10 @@
 %global pom_version 3.3.3
 %global base_release 0
 
-%if 0%{?rhel} == 5
-%define jdk_version 1.7.0
-%define bcmail_package bouncycastle146-mail
-%else
 %define jdk_version 1.8.0
 %define bcmail_package bouncycastle-mail
-%endif
 
-%if 0%{?rhel} >= 7 || 0%{?fedora} >= 21
 %define maven maven
-%else
-%define maven apache-maven
-%endif
-
 
 %if %{?build_number:1}%{!?build_number:0}
 %define release_version 0.build.%{build_number}
@@ -180,6 +170,10 @@ if [ $1 -eq 0 ] ; then
 fi
 
 %changelog
+%changelog
+* Mon Jun 21 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.3-0
+- 3.3.3 packaging for EL9
+
 * Fri May 13 2022 Enrico Vianello <enrivo.vianello at cnaf.infn.it> - 3.3.3-0
 - Packaging 3.3.3 version
 

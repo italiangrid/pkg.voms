@@ -27,25 +27,10 @@ Source: %{name}-%{version}.tar.gz
 
 BuildRequires: asciidoc
 
-%if 0%{?rhel} == 6
-BuildRequires: python-ZSI
-BuildRequires: python-devel
-BuildRequires: python-simplejson
-BuildRequires: PyXML
-
-Requires: python
-Requires: python-ZSI
-Requires: python-simplejson
-Requires: PyXML
-%endif
-
-
-%if 0%{?rhel} > 6
 BuildRequires: python2-zsi
 
 Requires: python2
 Requires: python2-zsi
-%endif
 
 BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -99,6 +84,9 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitelib}/voms_admin_client-%{version}-py%{pydotver}.egg-info
 
 %changelog
+* Mon Jun 21 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 2.0.21-1
+- 2.0.21 packaging for EL9
+
 * Wed Apr 7 2021 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 2.0.21-1
 - 2.0.21 packaging
 
