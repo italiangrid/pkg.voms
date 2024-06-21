@@ -6,11 +6,7 @@
 %global base_version 3.9.0
 %global base_release 0
 
-%if 0%{?rhel} == 5
-%define jdk_version 1.7.0
-%else
 %define jdk_version 1.8.0
-%endif
 
 %if %{?build_number:1}%{!?build_number:0}
 %define release_version 0.build.%{build_number}
@@ -37,17 +33,8 @@ BuildRequires:  java-%{jdk_version}-openjdk-devel
 
 Requires: java-%{jdk_version}-openjdk-devel
 
-%if 0%{?rhel} == 6
-Requires: python(abi) = 2.6
-%endif
-
-%if 0%{?rhel} == 7
 Requires: python(abi) = 2.7
-%endif
-
-%if 0%{?rhel} == 7
 Requires: initscripts
-%endif
 
 Requires: curl
 
@@ -78,11 +65,7 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/voms-admin
 
 mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/log/voms-admin
 
-%if 0%{?rhel} == 7
-  rm -f $RPM_BUILD_ROOT%{_initrddir}/voms-admin
-%else
-  rm -f $RPM_BUILD_ROOT%{_exec_prefix}/lib/systemd/system/voms-admin.service
-%endif
+rm -f $RPM_BUILD_ROOT%{_initrddir}/voms-admin
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -110,11 +93,7 @@ exit 0
 
 %post
 
-%if 0%{?rhel} == 6
-/sbin/chkconfig --add voms-admin
-%else
 systemctl enable voms-admin.service
-%endif
 
 
 # When upgrading
@@ -130,39 +109,22 @@ fi
 
 # When uninstalling 
 if [ $1 = 0 ]; then
-  %if 0%{?rhel} == 6
-    /sbin/service voms-admin stop >/dev/null 2>&1 || :
-    /sbin/chkconfig --del voms-admin
-  %else
-    systemctl stop voms-admin.service
-    systemctl disable voms-admin.service
-  %endif
+  systemctl stop voms-admin.service
+  systemctl disable voms-admin.service
 fi
 
 exit 0
 
 %postun
 if [ $1 -gt 1 ]; then
-  %if 0%{?rhel} == 6
-    /sbin/service voms-admin restart 2>&1 || :
-  %else
-    systemctl restart voms-admin.service
-  %endif
+  systemctl restart voms-admin.service
 fi
 
 %files
 
 %defattr(-,root,root,-)
 
-%if 0%{?rhel} == 6
-
-%{_initrddir}/voms-admin
-
-%else
-
 %{_exec_prefix}/lib/systemd/system/voms-admin.service
-
-%endif
 
 
 %dir %{_sysconfdir}/voms-admin
