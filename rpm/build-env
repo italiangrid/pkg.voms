@@ -1,5 +1,5 @@
 #COMPONENTS="voms voms-api-java voms-clients voms-mysql-plugin"
-COMPONENTS="voms-mysql-mp voms-mysql-plugin voms-clients voms voms-admin-server voms-admin-client"
+COMPONENTS="voms-api-java voms-mysql-mp voms-mysql-plugin voms-clients voms voms-admin-server"
 #COMPONENTS_centos7="voms-admin-server voms-admin-client"
 #COMPONENTS_centos9="voms-admin-server"
 PKG_TAG=VOMS-202406
