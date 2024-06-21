@@ -1,5 +1,5 @@
 BUILD_NAME=voms-mysql-mp
-BUILD_REPO=git://github.com/italiangrid/voms-mp
+BUILD_REPO=https://github.com/italiangrid/voms-mp.git
 BUILD_TAG=master
-PKG_REPO=git://github.com/italiangrid/pkg.voms.git
+PKG_REPO=https://github.com/italiangrid/pkg.voms.git
 PKG_SPEC_FILE=voms-mysql-mp/rpm/voms-mysql-mp/voms-mysql-mp.spec
