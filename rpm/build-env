@@ -1,16 +1,13 @@
-#COMPONENTS="voms voms-api-java voms-clients voms-mysql-plugin"
+# Components list - Default value is the complete list
 COMPONENTS="voms-api-java voms-mysql-mp voms-mysql-plugin voms-clients voms voms-admin-server"
-#COMPONENTS_centos7="voms-admin-server voms-admin-client"
-#COMPONENTS_centos9="voms-admin-server"
+
 PKG_TAG=VOMS-202406
+
+# Set to 1 if you want to skip the pull of the build image
+#SKIP_PKG_BASE_PULL_IMAGE=1
+
+# Set to 1 if you want to store rpms into stage area
 PKG_STAGE_RPMS=1
-INCLUDE_BUILD_NUMBER=1
-#PKG_REPO=git://github.com/italiangrid/pkg.voms.git
-#PKG_UPLOAD_RPMS=1
-#PKG_NEXUS_HOST=https://repo.cloud.cnaf.infn.it
-#PKG_REPO=/code/pkg.voms
-#BUILD_REPO_VOMS_ADMIN_SERVER=/code/voms-admin-server
-#BUILD_REPO_VOMS_CLIENTS=/code/voms-clients
-#MVN_REPO_CONTAINER_NAME=mvn-build-repo
-#BUILD_REPO_VOMS_ADMIN_CLIENT=/code/voms-admin-client 
-#DOCKER_ARGS="-v ${HOME}/git/pkg.voms:/code/pkg.voms"
+
+# Comment out this if you want to test locally the changes
+# PKG_REPO=/code/pkg.storm

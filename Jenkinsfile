@@ -15,7 +15,7 @@ def platform2Dir = [
   "almalinux9java17": 'rpm',
 ]
 
-def buildPackages(platform, platform2Dir) {
+def buildPackages(platform, platform2Dir, includeBuildNumber) {
   return {
     unstash "source"
 
@@ -25,8 +25,13 @@ def buildPackages(platform, platform2Dir) {
       error("Unknown platform: ${platform}")
     }
 
+    def includeEnv = ""
+    if (includeBuildNumber) {
+      includeEnv = "INCLUDE_BUILD_NUMBER=1"
+    }
+
     dir(platformDir) {
-      sh "PLATFORM=${platform} pkg-build.sh"
+      sh "PLATFORM=${platform} ${includeEnv} pkg-build.sh"
     }
   }
 }
@@ -43,6 +48,10 @@ pipeline {
 
   triggers {
     cron('@daily')
+  }
+
+  parameters {
+    booleanParam(name: 'INCLUDE_BUILD_NUMBER', defaultValue: true, description: 'Include build number into rpm name')
   }
 
   environment {
@@ -76,8 +85,11 @@ pipeline {
     stage('package') {
       steps {
         script {
+          if (params.INCLUDE_BUILD_NUMBER) {
+            env.INCLUDE_BUILD_NUMBER = '1'
+          }
           def buildStages = PLATFORMS.split(' ').collectEntries {
-            [ "${it} build packages" : buildPackages(it, platform2Dir) ]
+            [ "${it} build packages" : buildPackages(it, platform2Dir, params.INCLUDE_BUILD_NUMBER ) ]
           }
           parallel buildStages
         }
