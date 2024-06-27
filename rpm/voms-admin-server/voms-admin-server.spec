@@ -4,7 +4,7 @@
 %global random_num %(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 8)
 
 %global base_version 3.9.0
-%global base_release 0
+%global base_release 1
 
 %define jdk_version 1.8.0
 
@@ -158,6 +158,9 @@ fi
 %attr(-,voms,voms) %dir %{_localstatedir}/log/voms-admin
 
 %changelog
+* Wed Jun 26 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.9.0-1
+- Packaging for version 3.9.0
+
 * Wed Aug 31 2022 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.9.0-0
 - Packaging for version 3.9.0
 

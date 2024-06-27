@@ -1,6 +1,6 @@
 %global pom_version 3.3.3
 %global base_version 3.3.3
-%global base_release 0
+%global base_release 1
 
 %define jdk_version 1.8.0
 
@@ -93,7 +93,7 @@ rm -rf %{buildroot}
 %doc %{_javadocdir}/%{name}-%{pom_version}
 
 %changelog
-* Mon Jun 21 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.3-0
+* Mon Jun 21 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.3-1
 - Bumped packaging for 3.3.3 version
 
 * Thu Jan 25 2018 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 3.3.2-0

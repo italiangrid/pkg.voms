@@ -1,5 +1,5 @@
 %global pom_version 3.3.3
-%global base_release 0
+%global base_release 1
 
 %define jdk_version 1.8.0
 %define bcmail_package bouncycastle-mail
@@ -170,8 +170,7 @@ if [ $1 -eq 0 ] ; then
 fi
 
 %changelog
-%changelog
-* Mon Jun 21 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.3-0
+* Mon Jun 21 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.3-1
 - 3.3.3 packaging for EL9
 
 * Fri May 13 2022 Enrico Vianello <enrivo.vianello at cnaf.infn.it> - 3.3.3-0
