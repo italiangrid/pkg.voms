@@ -1,8 +1,9 @@
 BUILD_NAME=voms
 BUILD_REPO=https://github.com/italiangrid/voms.git
 BUILD_TAG=develop
+PKG_TAG=VOMS-202406
 PKG_REPO=https://github.com/italiangrid/pkg.voms.git
 PKG_SPEC_FILE=voms/rpm/voms/voms.spec
 PKG_PREBUILD_SCRIPT=voms/rpm/voms/pre-build.sh
 PKG_STAGE_RPMS=1
-TARBALL_VERSION=2.1.1
+TARBALL_VERSION=2.1.0

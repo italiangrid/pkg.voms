@@ -1,6 +1,7 @@
 BUILD_NAME=voms-mysql-plugin
 BUILD_REPO=https://github.com/italiangrid/voms-mysql-plugin.git
 BUILD_TAG=develop
+PKG_TAG=VOMS-202406
 PKG_REPO=https://github.com/italiangrid/pkg.voms.git
 PKG_SPEC_FILE=voms-mysql-plugin/rpm/voms-mysql-plugin/voms-mysql-plugin.spec
 PKG_PREBUILD_SCRIPT=voms-mysql-plugin/rpm/voms-mysql-plugin/pre-build.sh
