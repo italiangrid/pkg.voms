@@ -2,6 +2,5 @@ BUILD_NAME=voms-admin-server
 BUILD_REPO=https://github.com/italiangrid/voms-admin-server.git
 BUILD_TAG=v3.9.0
 PKG_REPO=https://github.com/italiangrid/pkg.voms.git
-PKG_TAG=VOMS-202406
 PKG_SPEC_FILE=voms-admin-server/rpm/voms-admin-server/voms-admin-server.spec
 TARBALL_VERSION=3.9.0

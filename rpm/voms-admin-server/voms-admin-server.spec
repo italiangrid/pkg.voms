@@ -4,12 +4,12 @@
 %global random_num %(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 8)
 
 %global base_version 3.9.0
-%global base_release 1
+%global base_release 2
 
 %define jdk_version 1.8.0
 
 %if %{?build_number:1}%{!?build_number:0}
-%define release_version 0.build.%{build_number}
+%define release_version %{base_release}.build.%{build_number}
 %else
 %define release_version %{base_release}
 %endif
@@ -19,21 +19,21 @@ Version: %{base_version}
 Release: %{release_version}%{?dist}
 Summary: The VOMS Administration service
 
-Group:  Applications/Internet
-License:    ASL 2.0
+Group: Applications/Internet
+License: ASL 2.0
 URL: http://italiangrid.github.io/voms
-Source:  %{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)-%{random_num}
+Source: %{name}-%{version}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)-%{random_num}
 
-BuildArch:      noarch
+BuildArch: noarch
 
-BuildRequires:  apache-maven
-BuildRequires:  jpackage-utils
-BuildRequires:  java-%{jdk_version}-openjdk-devel
+BuildRequires: apache-maven
+BuildRequires: jpackage-utils
+BuildRequires: java-%{jdk_version}-openjdk-devel
 
 Requires: java-%{jdk_version}-openjdk-devel
 
-Requires: python(abi) = 2.7
+Requires: python%{python3_pkgversion}-devel
 Requires: initscripts
 
 Requires: curl
