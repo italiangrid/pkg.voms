@@ -2,7 +2,7 @@
 #COMPONENTS="voms-api-java voms-mysql-mp voms-mysql-plugin voms-clients voms voms-admin-server"
 COMPONENTS="voms"
 
-PKG_TAG=VOMS-202503
+PKG_TAG=voms-202503
 
 # Set to 1 if you want to skip the pull of the build image
 #SKIP_PKG_BASE_PULL_IMAGE=1
