@@ -1,7 +1,6 @@
 BUILD_NAME=voms-admin-client
 BUILD_REPO=https://github.com/italiangrid/voms-admin-client.git
 BUILD_TAG=v2.0.21
-PKG_TAG=VOMS-202406
 PKG_REPO=https://github.com/italiangrid/pkg.voms.git
 PKG_SPEC_FILE=voms-admin-client/rpm/voms-admin-client/voms-admin-client.spec
 TARBALL_VERSION=2.0.21

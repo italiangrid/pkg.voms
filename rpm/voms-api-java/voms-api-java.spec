@@ -1,8 +1,8 @@
-%global pom_version 3.3.3
-%global base_version 3.3.3
-%global base_release 1
+%global pom_version 3.3.4-SNAPSHOT
+%global base_version 3.3.4
+%global base_release 0
 
-%define jdk_version 1.8.0
+%define jdk_version 17
 
 %if 0%{?rhel} >= 7 || 0%{?fedora} >= 21
 %define maven maven
@@ -37,7 +37,7 @@ BuildRequires:  java-%{jdk_version}-openjdk-devel
 
 Provides:       voms-api-java3
 Requires:       jpackage-utils
-Requires:       canl-java >= 2.6
+Requires:       canl-java >= 2.7
 Requires:       java-%{jdk_version}-openjdk
 
 %description
@@ -93,6 +93,9 @@ rm -rf %{buildroot}
 %doc %{_javadocdir}/%{name}-%{pom_version}
 
 %changelog
+* Tue Mar 25 2025 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.4-0
+- Bumped packaging for 3.3.4 version
+
 * Mon Jun 21 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.3-1
 - Bumped packaging for 3.3.3 version
 

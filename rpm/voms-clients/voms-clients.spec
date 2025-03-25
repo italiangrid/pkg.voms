@@ -1,7 +1,7 @@
-%global pom_version 3.3.3
-%global base_release 1
+%global pom_version 3.3.5
+%global base_release 0
 
-%define jdk_version 1.8.0
+%define jdk_version 17
 %define bcmail_package bouncycastle-mail
 
 %define maven maven
@@ -18,7 +18,7 @@
 %global _varlib /var/lib
 
 Name: voms-clients-java
-Version: 3.3.3
+Version: 3.3.5
 Release: %{release_version}%{?dist}
 Summary: The Virtual Organisation Membership Service command line clients
 
@@ -170,7 +170,13 @@ if [ $1 -eq 0 ] ; then
 fi
 
 %changelog
-* Mon Jun 21 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.3-1
+* Tue Mar 25 2025 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.5-0
+- Packaging 3.3.5-0 version
+
+* Fri Aug 2 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.4
+- Packaging 3.3.4-1 version
+
+* Fri Jun 21 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.3-1
 - 3.3.3 packaging for EL9
 
 * Fri May 13 2022 Enrico Vianello <enrivo.vianello at cnaf.infn.it> - 3.3.3-0

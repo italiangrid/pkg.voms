@@ -1,8 +1,8 @@
 # Components list - Default value is the complete list
 #COMPONENTS="voms-api-java voms-mysql-mp voms-mysql-plugin voms-clients voms voms-admin-server"
-COMPONENTS="voms"
+COMPONENTS="voms voms-api-java voms-clients"
 
-PKG_TAG=voms-202503
+PKG_TAG=main
 
 # Set to 1 if you want to skip the pull of the build image
 #SKIP_PKG_BASE_PULL_IMAGE=1

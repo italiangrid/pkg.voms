@@ -58,7 +58,7 @@ pipeline {
   environment {
     PKG_TAG = "${env.BRANCH_NAME}"
     DOCKER_REGISTRY_HOST = "${env.DOCKER_REGISTRY_HOST}"
-    PLATFORMS = "almalinux8java8 almalinux9java8"
+    PLATFORMS = "almalinux9java17"
     PACKAGES_VOLUME = "pkg-vol-${env.BUILD_TAG}"
     STAGE_AREA_VOLUME = "sa-vol-${env.BUILD_TAG}"
     PKG_BUILD_NUMBER = "${env.BUILD_NUMBER}"
@@ -106,6 +106,18 @@ pipeline {
     stage('cleanup') {
       steps {
           sh 'docker volume rm ${PACKAGES_VOLUME} ${STAGE_AREA_VOLUME} || echo Volume removal failed'
+      }
+    }
+  }
+  post {
+    failure {
+      mattermostSend(message: "${env.JOB_NAME} - ${env.BUILD_NUMBER} has failed (<${env.BUILD_URL}|Open>)", color: "danger")
+    }
+    changed {
+      script{
+        if ('SUCCESS'.equals(currentBuild.result)) {
+          mattermostSend(message: "${env.JOB_NAME} - ${env.BUILD_NUMBER} Back to normal (<${env.BUILD_URL}|Open>)", color: "good")
+        }
       }
     }
   }
