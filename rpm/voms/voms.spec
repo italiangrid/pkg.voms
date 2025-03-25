@@ -1,5 +1,5 @@
-%global base_version 2.1.0
-%global base_release 1
+%global base_version 2.1.2
+%global base_release 0
 
 %if %{?build_number:1}%{!?build_number:0}
 %define release_version 0.build.%{build_number}
@@ -333,6 +333,8 @@ fi
 %{_mandir}/man8/voms.8*
 
 %changelog
+* Tue Mar 25 2025 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 2.1.2-0
+- Packaging for 2.1.2-0
 * Thu Jun 27 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 2.1.0-1
 - Packaging for 2.1.0-1
 * Sat Apr 10 2021 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 2.1.0-0
