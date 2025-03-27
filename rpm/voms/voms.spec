@@ -1,5 +1,5 @@
 %global base_version 2.1.2
-%global base_release 0
+%global base_release 1
 
 %if %{?build_number:1}%{!?build_number:0}
 %define release_version 0.build.%{build_number}
@@ -104,11 +104,6 @@ Requires(pre):		shadow-utils
 Requires(post):		chkconfig
 Requires(preun):	chkconfig
 
-%if 0%{?rhel} < 7
-Requires(preun):	initscripts
-Requires(postun):	initscripts
-%endif
-
 %description server
 The Virtual Organization Membership Service (VOMS) is an attribute authority
 which serves as central repository for VO user authorization information,
@@ -145,11 +140,9 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/grid-security/%{name}
 mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/log/%{name}
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 
-%if 0%{?rhel} >= 7
-  mkdir -p $RPM_BUILD_ROOT%{_exec_prefix}/lib/systemd/system
-  cp systemd/%{name}@.service $RPM_BUILD_ROOT%{_exec_prefix}/lib/systemd/system/%{name}@.service
-  rm -rf $RPM_BUILD_ROOT%{_initrddir}/%{name}
-%endif
+mkdir -p $RPM_BUILD_ROOT%{_exec_prefix}/lib/systemd/system
+cp systemd/%{name}@.service $RPM_BUILD_ROOT%{_exec_prefix}/lib/systemd/system/%{name}@.service
+rm -rf $RPM_BUILD_ROOT%{_initrddir}/%{name}
 
 mkdir -p $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
 install -m 644 -p LICENSE AUTHORS $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
@@ -196,11 +189,6 @@ getent passwd %{name} >/dev/null || useradd -r -g %{name} \
 exit 0
 
 %post server
-%if 0%{?rhel} < 7
-if [ "$1" = "1" ] ; then
-  /sbin/chkconfig --add %{name}
-fi
-%endif
 
 if [ $1 -eq 2 ]; then
     chown -R %{name} /var/log/voms
@@ -209,28 +197,10 @@ fi
 
 %preun server
 
-%if 0%{?rhel} < 7
-if [ "$1" = "0" ]; then
-    # disable service
-    /sbin/service %{name} stop >/dev/null 2>&1 || :
-    /sbin/chkconfig --del %{name}
-fi
-%endif
-
 %postun server
 
-%if 0%{?rhel} < 7
-if [ $1 -ge 1 ]; then
-    /sbin/service %{name} condrestart >/dev/null 2>&1 || :
-fi
-%endif
-
 if [ "$1" = "0" ] ; then
-  %if 0%{?rhel} >= 7
-    rm -f %{_exec_prefix}/lib/systemd/system/%{name}@.service
-  %else
-    rm -f %{_initrddir}/%{name}
-  %endif
+  rm -f %{_exec_prefix}/lib/systemd/system/%{name}@.service
 fi
 
 %pre clients
@@ -313,11 +283,7 @@ fi
 %defattr(-,root,root,-)
 %{_sbindir}/%{name}
 
-%if 0%{?rhel} >= 7
-  %{_exec_prefix}/lib/systemd/system/%{name}@.service
-%else
-  %{_initrddir}/%{name}
-%endif
+%{_exec_prefix}/lib/systemd/system/%{name}@.service
 
 %config(noreplace) %{_sysconfdir}/sysconfig/%{name}
 %dir %{_sysconfdir}/%{name}
@@ -333,8 +299,8 @@ fi
 %{_mandir}/man8/voms.8*
 
 %changelog
-* Tue Mar 25 2025 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 2.1.2-0
-- Packaging for 2.1.2-0
+* Thu Mar 27 2025 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 2.1.2-1
+- Packaging for 2.1.2-1
 * Thu Jun 27 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 2.1.0-1
 - Packaging for 2.1.0-1
 * Sat Apr 10 2021 Andrea Ceccanti <andrea.ceccanti at cnaf.infn.it> - 2.1.0-0
