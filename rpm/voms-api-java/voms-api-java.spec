@@ -1,6 +1,6 @@
-%global pom_version 3.3.4-SNAPSHOT
+%global pom_version 3.3.4
 %global base_version 3.3.4
-%global base_release 0
+%global base_release 1
 
 %define jdk_version 17
 
@@ -93,7 +93,7 @@ rm -rf %{buildroot}
 %doc %{_javadocdir}/%{name}-%{pom_version}
 
 %changelog
-* Tue Mar 25 2025 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.4-0
+* Tue Mar 25 2025 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.4-1
 - Bumped packaging for 3.3.4 version
 
 * Mon Jun 21 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 3.3.3-1
