@@ -1,6 +1,6 @@
 # Components list - Default value is the complete list
 #COMPONENTS="voms-api-java voms-mysql-mp voms-mysql-plugin voms-clients voms voms-admin-server"
-COMPONENTS="voms voms-api-java voms-clients"
+COMPONENTS="voms"
 
 PKG_TAG=main
 

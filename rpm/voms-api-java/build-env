@@ -1,7 +1,0 @@
-BUILD_NAME=voms-api-java
-BUILD_REPO=https://github.com/italiangrid/voms-api-java.git
-BUILD_TAG=develop
-PKG_REPO=https://github.com/italiangrid/pkg.voms.git
-PKG_SPEC_FILE=voms-api-java/rpm/voms-api-java/voms-api-java.spec
-PKG_STAGE_RPMS=1
-TARBALL_VERSION=3.3.4

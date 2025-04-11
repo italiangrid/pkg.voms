@@ -58,7 +58,7 @@ pipeline {
   environment {
     PKG_TAG = "${env.BRANCH_NAME}"
     DOCKER_REGISTRY_HOST = "${env.DOCKER_REGISTRY_HOST}"
-    PLATFORMS = "almalinux9java17"
+    PLATFORMS = "almalinux8java8 almalinux9java8"
     PACKAGES_VOLUME = "pkg-vol-${env.BUILD_TAG}"
     STAGE_AREA_VOLUME = "sa-vol-${env.BUILD_TAG}"
     PKG_BUILD_NUMBER = "${env.BUILD_NUMBER}"
