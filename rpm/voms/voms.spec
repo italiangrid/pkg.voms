@@ -1,4 +1,4 @@
-%global base_version 2.1.2
+%global base_version 2.1.3
 %global base_release 1
 
 %if %{?build_number:1}%{!?build_number:0}
@@ -31,8 +31,6 @@ Requires: expat
 Requires: openssl
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
-Packager: Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it>
 
 %description
 The Virtual Organization Membership Service (VOMS) is an attribute authority
@@ -299,6 +297,8 @@ fi
 %{_mandir}/man8/voms.8*
 
 %changelog
+* Thu Nov 27 2025 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 2.1.3-1
+- Packaging for 2.1.3-1
 * Thu Mar 27 2025 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 2.1.2-1
 - Packaging for 2.1.2-1
 * Thu Jun 27 2024 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 2.1.0-1
